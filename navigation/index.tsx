@@ -20,7 +20,8 @@ import { RootStackParamList, RootTabParamList, RootTabScreenProps } from '../typ
 import LinkingConfiguration from './LinkingConfiguration';
 
 import { ConnectorEvents, useWalletConnect, WalletConnectContext, WalletConnectLogo } from '@walletconnect/react-native-dapp';
-import { Text, View } from '../components/Themed';
+import { View } from '../components/Themed';
+import { MonoText } from "../components/StyledText";
 import { StyleSheet, TouchableOpacity } from 'react-native';
 
 import { ethers } from 'ethers'
@@ -95,9 +96,9 @@ function BottomTabNavigator() {
 
   return (
     (connector.connected === false) ? <View style={styles.container}>
-      <Text style={[{fontStyle:"normal", fontWeight:"bold", fontSize:30}]}>Login:</Text>
+      <MonoText style={[{fontStyle:"normal", fontWeight:"bold", fontSize:30}]}>Login:</MonoText>
       <TouchableOpacity onPress={connectWallet} style={[ { borderRadius: 25 }, {backgroundColor:"blue"}, {padding:10}, {margin:10}]} >
-        <Text style={[ {fontWeight:"bold"}, {color:"white"} ]}>Connect With WalletConnect</Text>
+        <MonoText style={[ {fontWeight:"bold"}, {color:"white"} ]}>Connect With WalletConnect</MonoText>
       </TouchableOpacity>
     </View> : 
       <WalletConnectContext.Provider value={connector}>
@@ -113,8 +114,14 @@ function BottomTabNavigator() {
             title: 'Inbox',
             tabBarIcon: ({ color }) => <TabBarIcon name="inbox" color={color} />,
             headerLeft: () => (
-              <Text>{`   ` + shortenAddress(connector.accounts[0])}</Text>
+              <MonoText>{` ` + shortenAddress(connector.accounts[0])}</MonoText>
             ),
+            headerTitleStyle: {
+              fontFamily:"regular"
+            },
+            tabBarLabelStyle: {
+              fontFamily:"regular"
+            },
             headerRight: () => (
               <Pressable
                 onPress={() =>
@@ -128,11 +135,11 @@ function BottomTabNavigator() {
                   opacity: pressed ? 0.5 : 1,
                 })}>
                   {!!connector.connected && (
-                    <Text style={styles.buttonTextStyle}>Logout</Text>
+                    <MonoText style={styles.buttonTextStyle}>Logout</MonoText>
                   )}
 
                   {!connector.connected && (
-                    <Text style={styles.buttonTextStyle}>Login</Text>
+                    <MonoText style={styles.buttonTextStyle}>Login</MonoText>
                   )}
               </Pressable>
             ),
@@ -143,7 +150,13 @@ function BottomTabNavigator() {
           component={TabTwoScreen}
           options={{
             title: 'Messages',
-            tabBarIcon: ({ color }) => <TabBarIcon name="comment" color={color} />,
+            headerTitleStyle: {
+              fontFamily:"regular",
+            },
+            tabBarLabelStyle: {
+              fontFamily:"regular"
+            },
+            tabBarIcon: ({ color }) => <TabBarIcon name="comments" color={color} />,
           }}
         />
       </BottomTab.Navigator>

@@ -1417,6 +1417,11 @@
     "@ethersproject/properties" "^5.6.0"
     "@ethersproject/strings" "^5.6.1"
 
+"@expo-google-fonts/jetbrains-mono@^0.2.2":
+  version "0.2.2"
+  resolved "https://registry.yarnpkg.com/@expo-google-fonts/jetbrains-mono/-/jetbrains-mono-0.2.2.tgz#6cc1efd17e0976cf9efdbfec8a05c06f3dc5dc4c"
+  integrity sha512-8PHww9xlNtolG9HAODTWPGG0mxX7UApfHQRlBO3+X/Z5tSTvJkT9ErBAdh0WcKZtB2z46wt2rYBwOIpIL8kd2A==
+
 "@expo/config-plugins@4.0.15", "@expo/config-plugins@^4.0.2":
   version "4.0.15"
   resolved "https://registry.yarnpkg.com/@expo/config-plugins/-/config-plugins-4.0.15.tgz#cc170a0cf890973b6491cf357540e9955296019c"
