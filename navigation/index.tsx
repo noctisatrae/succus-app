@@ -8,7 +8,7 @@ import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { NavigationContainer, DefaultTheme, DarkTheme } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import * as React from 'react';
-import { ColorSchemeName, Pressable } from 'react-native';
+import { ColorSchemeName, ImageBackground, Pressable } from 'react-native';
 
 import Colors from '../constants/Colors';
 import useColorScheme from '../hooks/useColorScheme';
@@ -21,11 +21,12 @@ import LinkingConfiguration from './LinkingConfiguration';
 
 import { ConnectorEvents, useWalletConnect, WalletConnectContext, WalletConnectLogo } from '@walletconnect/react-native-dapp';
 import { View } from '../components/Themed';
-import { MonoText } from "../components/StyledText";
+import { MonoText, StyledButton } from "../components/StyledText";
 import { StyleSheet, TouchableOpacity } from 'react-native';
 
-import { ethers } from 'ethers'
 import AsyncStorage from "@react-native-async-storage/async-storage";
+
+import Address from '../components/Address';
 
 export default function Navigation({ colorScheme }: { colorScheme: ColorSchemeName }) {
   return (
@@ -37,19 +38,11 @@ export default function Navigation({ colorScheme }: { colorScheme: ColorSchemeNa
   );
 }
 
-const getAdress = async (address) => {
-  await AsyncStorage.setItem("address", address)
-}
-
 const shortenAddress = (address: string) => {
   return `${address.slice(0, 6)}...${address.slice(
     address.length - 4,
     address.length
   )}`;
-}
-
-const setAdress = async(address) => {
-  await AsyncStorage.setItem("address", address)
 }
 
 /**
@@ -96,10 +89,10 @@ function BottomTabNavigator() {
 
   return (
     (connector.connected === false) ? <View style={styles.container}>
-      <MonoText style={[{fontStyle:"normal", fontWeight:"bold", fontSize:30}]}>Login:</MonoText>
-      <TouchableOpacity onPress={connectWallet} style={[ { borderRadius: 25 }, {backgroundColor:"blue"}, {padding:10}, {margin:10}]} >
-        <MonoText style={[ {fontWeight:"bold"}, {color:"white"} ]}>Connect With WalletConnect</MonoText>
-      </TouchableOpacity>
+      <MonoText font='ultra' style={[{fontStyle:"normal", fontSize:30}]}>Login:</MonoText>
+      <StyledButton onPress={connectWallet}>
+        Connect Wallet
+      </StyledButton>
     </View> : 
       <WalletConnectContext.Provider value={connector}>
         <BottomTab.Navigator
@@ -112,9 +105,10 @@ function BottomTabNavigator() {
           component={TabOneScreen}
           options={({ navigation }: RootTabScreenProps<'TabOne'>) => ({
             title: 'Inbox',
+            tabBarStyle: {},
             tabBarIcon: ({ color }) => <TabBarIcon name="inbox" color={color} />,
             headerLeft: () => (
-              <MonoText>{` ` + shortenAddress(connector.accounts[0])}</MonoText>
+              <Address address={connector.accounts[0]} />
             ),
             headerTitleStyle: {
               fontFamily:"regular"
@@ -203,7 +197,6 @@ const styles = StyleSheet.create({
     marginBottom: 20,
   },
   buttonTextStyle: {
-    color: "#FFFFFF",
     paddingVertical: 10,
     paddingHorizontal: 15,
     fontSize: 16,

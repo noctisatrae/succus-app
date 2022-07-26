@@ -24,6 +24,7 @@ export function useThemeColor(
 
 type ThemeProps = {
   lightColor?: string;
+  font?: string;
   darkColor?: string;
 };
 

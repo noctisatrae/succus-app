@@ -13,7 +13,7 @@ import Navigation from './navigation';
 
 import * as SplashScreen from "expo-splash-screen";
 
-import { JetBrainsMono_400Regular, JetBrainsMono_400Regular_Italic, JetBrainsMono_700Bold,  JetBrainsMono_700Bold_Italic } from '@expo-google-fonts/jetbrains-mono';
+import { JetBrainsMono_400Regular, JetBrainsMono_400Regular_Italic, JetBrainsMono_700Bold,  JetBrainsMono_700Bold_Italic, JetBrainsMono_800ExtraBold, JetBrainsMono_800ExtraBold_Italic } from '@expo-google-fonts/jetbrains-mono';
 import * as Font from "expo-font";
 
 // Keep the splash screen visible while we fetch resources
@@ -27,7 +27,7 @@ export default function App() {
     async function prepare() {
       try {
         // Pre-load fonts, make any API calls you need to do here
-        await Font.loadAsync({ "regular":JetBrainsMono_400Regular, "italic":JetBrainsMono_400Regular_Italic,  "bold":JetBrainsMono_700Bold, "boldItalic":JetBrainsMono_700Bold_Italic });
+        await Font.loadAsync({ "regular":JetBrainsMono_400Regular, "italic":JetBrainsMono_400Regular_Italic,  "bold":JetBrainsMono_700Bold, "boldItalic":JetBrainsMono_700Bold_Italic, "ultra":JetBrainsMono_800ExtraBold, "ultraItalic":JetBrainsMono_800ExtraBold_Italic });
         // Artificially delay for two seconds to simulate a slow loading
         // experience. Please remove this if you copy and paste the code!
       } catch (e) {
